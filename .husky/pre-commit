@@ -1,0 +1,3 @@
+#!/bin/sh
+
+node git-hook_verify-package-version-bump.js

@@ -1,0 +1,45 @@
+name: NPM Package
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Begin CI...
+        uses: actions/checkout@v2
+
+      - name: Use Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Use cached node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: nodeModules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            nodeModules-
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true
+
+      - name: Generate icons
+        run: npm run generate
+        env:
+          CI: true
+
+      - name: Release to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
