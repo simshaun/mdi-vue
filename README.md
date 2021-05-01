@@ -28,8 +28,8 @@ if they publish new icons.
    import { MdiMenu } from '@foxandfly/mdi-vue';
    ```
 
-   - The safest is Option 1 but Option 2 is a bit cleaner. Make sure you utilize
-     tree shaking if using the second approach.
+   > Option 1 is safer to use, but Option 2 is a bit cleaner. Make sure you utilize
+     tree shaking if using the second approach or you will end up with a multi-MB bundle.
 
 3. Then use it somewhere. e.g.
 
