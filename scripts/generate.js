@@ -56,7 +56,9 @@ fs.writeFile(path.join(outputDir, `mdi.js`), compiled({ icons }), function () {
 // Generate the thousands of individual files!
 //
 
-fs.rmSync(outputIconsDir, { recursive: true })
+if (fs.existsSync(outputIconsDir)) {
+  fs.rmSync(outputIconsDir, { recursive: true })
+}
 fs.mkdirSync(outputIconsDir)
 
 icons.forEach((icon) => {
