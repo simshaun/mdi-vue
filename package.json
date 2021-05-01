@@ -2,7 +2,7 @@
   "name": "@foxandfly/mdi-vue",
   "description": "Generates Vue components for the icons provided by https://materialdesignicons.com/",
   "author": "Shaun Simmons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "engines": {
     "node": ">=10"
