@@ -2,7 +2,7 @@
   "name": "@foxandfly/mdi-vue",
   "description": "Generates Vue components for the icons provided by https://materialdesignicons.com/",
   "author": "Shaun Simmons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "engines": {
     "node": ">=10"
@@ -11,12 +11,17 @@
     "generate": "node scripts/generate.js"
   },
   "dependencies": {},
+  "peerDependencies": {
+    "vue": "^3.0.11"
+  },
   "devDependencies": {
     "@mdi/js": "^5.9.55",
     "execa": "^5.0.0",
-    "husky": "^6.0.0"
+    "husky": "^6.0.0",
+    "lodash.template": "^4.5.0"
   },
   "files": [
+    "mdi.js",
     "icons"
   ],
   "prettier": {

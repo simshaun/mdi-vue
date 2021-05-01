@@ -1,34 +1,99 @@
 const fs = require('fs')
+const mdiIcons = require('@mdi/js')
 const path = require('path')
-const icons = require('@mdi/js')
-const { exit } = require('process')
+const template = require('lodash.template')
 
-const templateFile = path.join(__dirname, 'component-template')
-const outputDir = path.join(__dirname, '../icons')
+const outputDir = path.join(__dirname, '..')
+const outputIconsDir = path.join(__dirname, '../icons')
 
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir)
+const icons = Object.keys(mdiIcons)
+  .filter((name) => {
+    return name !== 'default' && name !== '__esModule'
+  })
+  .map((name) => {
+    return {
+      name: name.charAt(0).toUpperCase() + name.substring(1, name.length),
+      path: mdiIcons[name],
+    }
+  })
+
+//
+// Generate the mega-file!
+//
+
+const compiled = template(
+  `import { defineComponent as dc } from 'vue'
+const props = {
+  viewBox: {
+    type: String,
+    required: false,
+    default: '0 0 24 24',
+  },
+  titleAccess: {
+    type: String,
+    required: false,
+    default: '',
+  },
 }
+<% icons.forEach((icon) => { %>
+export const <%- icon.name %> = /*#__PURE__*/ dc({
+  name: '<%- icon.name %>',
+  template: \`<svg focusable="false" :viewBox="viewBox" :aria-hidden="titleAccess ? null : true" :role="titleAccess ? 'img' : null">
+  <path d="<%- icon.path %>" />
+  <title v-if="titleAccess">{{ titleAccess }}</title>
+</svg>\`,
+  props,
+})
+<% } ) %>
+`
+)
 
-const template = fs.readFileSync(templateFile, 'utf-8')
+fs.writeFile(path.join(outputDir, `mdi.js`), compiled({ icons }), function () {
+  console.log('Generated mdi.js')
+})
 
-//Generate TitleCase name and replace both ||name|| and ||path|| in template
+//
+// Generate the thousands of individual files!
+//
 
-function titleCase(str) {
-  return str.charAt(0).toUpperCase() + str.substring(1, str.length)
-}
+fs.rmSync(outputIconsDir, { recursive: true })
+fs.mkdirSync(outputIconsDir)
 
-Object.keys(icons).forEach((name) => {
-  if (name === 'default' || name === '__esModule') return
-
-  const titleCaseName = titleCase(name)
+icons.forEach((icon) => {
   fs.writeFile(
-    path.join(outputDir, `${titleCaseName}.vue`),
-    template
-      .replace('||name||', titleCaseName)
-      .replace('||path||', icons[name]),
-    function () {
-      console.log(`${titleCaseName}.vue`)
+    path.join(outputIconsDir, `${icon.name}.vue`),
+    `<template>
+  <svg focusable="false" :viewBox="viewBox" :aria-hidden="titleAccess ? null : true" :role="titleAccess ? 'img' : null">
+    <path d="||path||" />
+    <title v-if="titleAccess">{{ titleAccess }}</title>
+  </svg>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: '||name||',
+
+  props: {
+    viewBox: {
+      type: String,
+      required: false,
+      default: '0 0 24 24',
+    },
+    titleAccess: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+})
+</script>
+`
+      .replace('||name||', icon.name)
+      .replace('||path||', icon.path),
+    () => {
+      console.log(`Generated ${icon.name}.vue`)
     }
   )
 })
