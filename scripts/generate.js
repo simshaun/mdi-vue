@@ -47,9 +47,12 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 `)
 
 const jumboTypesTemplate = template(
-  `<% icons.forEach((icon) => { %>export const <%- icon.name %>: object\n<% } ) %>
-<% icons.forEach((icon) => { %>declare module '@foxandfly/mdi-vue/<%- icon.name %>';\n<% } ) %>
-`)
+  `interface Component {
+  name: string
+  props: object
+  render: Function
+}
+<% icons.forEach((icon) => { %>export const <%- icon.name %>: Component\n<% } ) %>`)
 
 if (fs.existsSync(outputIconsDir)) {
   fs.rmSync(outputIconsDir, { recursive: true })
@@ -72,12 +75,25 @@ const singleTemplate = template(
 export default <%= icon.component.replace('|_PROPS_|', props) %>
 `)
 
+const singleTypeTemplate = template(
+  `import { Component } from './index'
+declare const i: Component
+export default i
+`)
+
 icons.forEach((icon) => {
   fs.writeFile(
     path.join(outputIconsDir, `${icon.name}.js`),
     singleTemplate({ icon, props }),
     () => {
       console.log(`Generated ${icon.name}.js`)
+    }
+  )
+  fs.writeFile(
+    path.join(outputIconsDir, `${icon.name}.d.ts`),
+    singleTypeTemplate({ icon, props }),
+    () => {
+      console.log(`Generated ${icon.name}.d.ts`)
     }
   )
 })
