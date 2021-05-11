@@ -48,6 +48,7 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 
 const jumboTypesTemplate = template(
   `<% icons.forEach((icon) => { %>export const <%- icon.name %>: object\n<% } ) %>
+<% icons.forEach((icon) => { %>declare module '@foxandfly/mdi-vue/<%- icon.name %>';\n<% } ) %>
 `)
 
 if (fs.existsSync(outputIconsDir)) {
