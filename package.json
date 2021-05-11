@@ -3,13 +3,14 @@
   "description": "Generates Vue components for the icons provided by https://materialdesignicons.com/",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/FoxAndFly/mdi-vue",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "license": "MIT",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "generate": "node scripts/generate.js"
+    "generate": "node scripts/generate.js",
+    "prepublishOnly": "node scripts/prepublish.js"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -23,7 +24,7 @@
   },
   "files": [
     "index.js",
-    "icons"
+    "Mdi*.js"
   ],
   "prettier": {
     "printWidth": 80,

@@ -3,7 +3,6 @@ const mdiIcons = require('@mdi/js')
 const path = require('path')
 const template = require('lodash.template')
 
-const outputDir = path.join(__dirname, '..')
 const outputIconsDir = path.join(__dirname, '../icons')
 
 const props = `{ title: { type: String, required: false, default: '' } }`
@@ -47,18 +46,18 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 <% } ) %>
 `)
 
-fs.writeFile(path.join(outputDir, `index.js`), jumboTemplate({ icons, props }), function () {
+if (fs.existsSync(outputIconsDir)) {
+  fs.rmSync(outputIconsDir, { recursive: true })
+}
+fs.mkdirSync(outputIconsDir)
+
+fs.writeFile(path.join(outputIconsDir, `index.js`), jumboTemplate({ icons, props }), function () {
   console.log('Generated index.js')
 })
 
 //
 // Generate the thousands of individual files!
 //
-
-if (fs.existsSync(outputIconsDir)) {
-  fs.rmSync(outputIconsDir, { recursive: true })
-}
-fs.mkdirSync(outputIconsDir)
 
 const singleTemplate = template(
   `import { h } from 'vue'
