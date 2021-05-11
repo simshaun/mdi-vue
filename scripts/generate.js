@@ -47,8 +47,8 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 <% } ) %>
 `)
 
-fs.writeFile(path.join(outputDir, `mdi.js`), jumboTemplate({ icons, props }), function () {
-  console.log('Generated mdi.js')
+fs.writeFile(path.join(outputDir, `index.js`), jumboTemplate({ icons, props }), function () {
+  console.log('Generated index.js')
 })
 
 //
