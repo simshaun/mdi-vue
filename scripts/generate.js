@@ -46,6 +46,10 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 <% } ) %>
 `)
 
+const jumboTypesTemplate = template(
+  `<% icons.forEach((icon) => { %>export const <%- icon.name %>: object\n<% } ) %>
+`)
+
 if (fs.existsSync(outputIconsDir)) {
   fs.rmSync(outputIconsDir, { recursive: true })
 }
@@ -53,6 +57,9 @@ fs.mkdirSync(outputIconsDir)
 
 fs.writeFile(path.join(outputIconsDir, `index.js`), jumboTemplate({ icons, props }), function () {
   console.log('Generated index.js')
+})
+fs.writeFile(path.join(outputIconsDir, `index.d.ts`), jumboTypesTemplate({ icons, props }), function () {
+  console.log('Generated index.d.ts')
 })
 
 //
@@ -69,7 +76,7 @@ icons.forEach((icon) => {
     path.join(outputIconsDir, `${icon.name}.js`),
     singleTemplate({ icon, props }),
     () => {
-      console.log(`Generated ${icon.name}.vue`)
+      console.log(`Generated ${icon.name}.js`)
     }
   )
 })
