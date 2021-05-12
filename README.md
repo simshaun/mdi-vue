@@ -1,10 +1,7 @@
 # Material Design Icons
 
-This library generates Vue 3 components for the icons provided by
-https://materialdesignicons.com/
-
-Note: This library may occasionally be out-of-sync with https://materialdesignicons.com/
-if they publish new icons.
+This library generates Vue 3 components for Google's Material Design icons library.
+https://github.com/google/material-design-icons
 
 ## Usage
 
@@ -19,13 +16,13 @@ if they publish new icons.
    * Option 1:
 
    ```javascript
-   import MdiMenu from '@foxandfly/mdi-vue/icons/MdiMenu';
+   import Map from '@foxandfly/mdi-vue/Map';
    ```
 
    * Option 2:
 
    ```javascript
-   import { MdiMenu } from '@foxandfly/mdi-vue';
+   import { Map } from '@foxandfly/mdi-vue';
    ```
 
    > Option 1 is safer to use, but Option 2 is a bit cleaner. Make sure you utilize
@@ -36,18 +33,18 @@ if they publish new icons.
    ```html
    <template>
     <button>
-      <MdiMenu />
-      Menu
+      <Map />
+      Map
     </button>
    </template>
 
    <script>
-   import { MdiMenu } from '@foxandfly/mdi-vue';
+   import { Map } from '@foxandfly/mdi-vue';
    import { defineComponent } from 'vue'
 
    export default defineComponent({
      components: {
-       MdiMenu,
+       Map,
      },
    })
    </script>
