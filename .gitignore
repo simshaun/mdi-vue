@@ -2,3 +2,5 @@
 .DS_Store
 node_modules
 icons
+icons-svg-src
+icons-svg-optimized

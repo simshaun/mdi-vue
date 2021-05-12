@@ -34,7 +34,17 @@ jobs:
         env:
           CI: true
 
-      - name: Generate icons
+      - name: Download SVGs
+        run: npm run download
+        env:
+          CI: true
+
+      - name: Optimize SVGs
+        run: npm run optimize
+        env:
+          CI: true
+
+      - name: Generate icon components
         run: npm run generate
         env:
           CI: true

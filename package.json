@@ -1,18 +1,24 @@
 {
   "name": "@foxandfly/mdi-vue",
-  "description": "Generates Vue components for the icons provided by https://materialdesignicons.com/",
+  "description": "Generates Vue components for the icons provided by Google's Material Icons library",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/FoxAndFly/mdi-vue",
-  "version": "2.0.5",
+  "version": "3.0.0",
   "license": "MIT",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
+    "download": "node scripts/download.js",
+    "optimize": "node scripts/optimize.js",
     "generate": "node scripts/generate.js",
     "prepublishOnly": "node scripts/prepublish.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "async": "^3.2.0",
+    "node-fetch": "^2.6.1",
+    "svgo": "^2.3.0"
+  },
   "peerDependencies": {
     "vue": "^3.0.11"
   },
@@ -23,10 +29,8 @@
     "lodash.template": "^4.5.0"
   },
   "files": [
-    "index.js",
-    "index.d.ts",
-    "Mdi*.js",
-    "Mdi*.d.ts"
+    "*.js",
+    "*.d.ts"
   ],
   "prettier": {
     "printWidth": 80,
