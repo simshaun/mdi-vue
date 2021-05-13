@@ -5,6 +5,7 @@ export default function (name, innerHTML) {
     name,
     render() {
       return h('svg', {
+        class: 'mdi-icon',
         focusable: 'false',
         viewBox: '0 0 24 24',
         'aria-hidden': this.title ? null : true,
