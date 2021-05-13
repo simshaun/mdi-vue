@@ -3,7 +3,7 @@
   "description": "Generates Vue components for the icons provided by Google's Material Icons library",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/FoxAndFly/mdi-vue",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "license": "MIT",
   "engines": {
     "node": ">=14"
@@ -30,7 +30,9 @@
   },
   "files": [
     "*.js",
-    "*.d.ts"
+    "*.d.ts",
+    "!git-hook_verify-package-version-bump.js",
+    "utils/createSvgComponent.js"
   ],
   "prettier": {
     "printWidth": 80,

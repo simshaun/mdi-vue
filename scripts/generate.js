@@ -6,7 +6,6 @@ const template = require('lodash.template')
 const inputIconsDir = path.join(__dirname, '../icons-svg-optimized')
 const outputIconsDir = path.join(__dirname, '../icons')
 
-const props = `{ title: { type: String, required: false, default: '' } }`
 const icons = []
 
 eachLimit(fs.readdirSync(inputIconsDir), 100, async (file) => {
@@ -15,38 +14,17 @@ eachLimit(fs.readdirSync(inputIconsDir), 100, async (file) => {
     'utf8'
   )
   const svgWithoutWrapper = svgString.replace(/^<svg[^>]*>|<\/svg>$/g, '')
-  const svgJson = JSON.stringify(svgWithoutWrapper)
   const iconName = path.parse(file).name
 
-  icons.push({
-    name: iconName,
-    component: `{
-  name: '${iconName}',
-  render() {
-    return h('svg', {
-      focusable: 'false',
-      viewBox: '0 0 24 24',
-      'aria-hidden': this.title ? null : true,
-      role: this.title ? 'img' : null,
-      innerHTML: this.innerHTML,
-    })
-  },
-  props: |_PROPS_|,
-  computed: { innerHTML() { return (${svgJson} + (this.title ? '<title>' + this.title + '</title>' : '')) } },
-}`,
-  })
+  icons.push({ name: iconName, svg: svgWithoutWrapper })
 }).then(() => {
   //
   // Generate the mega-file!
   //
 
   const jumboTemplate = template(
-    `import { h } from 'vue'
-const props = <%= props %>
-<% icons.forEach((icon) => { %>
-export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
-<% } ) %>
-`
+    `<% icons.forEach((icon) => { %>export { default as <%- icon.name %> } from './<%- icon.name %>';
+<% } ) %>`
   )
 
   const jumboTypesTemplate = template(
@@ -65,14 +43,14 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
 
   fs.writeFile(
     path.join(outputIconsDir, `index.js`),
-    jumboTemplate({ icons, props }),
+    jumboTemplate({ icons }),
     function () {
       console.log('Generated index.js')
     }
   )
   fs.writeFile(
     path.join(outputIconsDir, `index.d.ts`),
-    jumboTypesTemplate({ icons, props }),
+    jumboTypesTemplate({ icons }),
     function () {
       console.log('Generated index.d.ts')
     }
@@ -83,8 +61,8 @@ export const <%- icon.name %> = <%= icon.component.replace(': |_PROPS_|', '') %>
   //
 
   const singleTemplate = template(
-    `import { h } from 'vue'
-export default <%= icon.component.replace('|_PROPS_|', props) %>
+    `import createSvgComponent from './utils/createSvgComponent'
+export default createSvgComponent(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
 `
   )
 
@@ -98,11 +76,11 @@ export default i
   eachLimit(icons, 20, async (icon) => {
     await fs.promises.writeFile(
       path.join(outputIconsDir, `${icon.name}.js`),
-      singleTemplate({ icon, props })
+      singleTemplate({ icon })
     )
     await fs.promises.writeFile(
       path.join(outputIconsDir, `${icon.name}.d.ts`),
-      singleTypeTemplate({ icon, props })
+      singleTypeTemplate({ icon })
     )
     console.log(`Generated ${icon.name}.js`)
     console.log(`Generated ${icon.name}.d.ts`)
