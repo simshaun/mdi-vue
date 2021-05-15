@@ -61,8 +61,8 @@ eachLimit(fs.readdirSync(inputIconsDir), 100, async (file) => {
   //
 
   const singleTemplate = template(
-    `import createSvgComponent from './utils/createSvgComponent'
-export default createSvgComponent(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
+    `import createSvgIcon from './utils/createSvgIcon'
+export default createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
 `
   )
 
