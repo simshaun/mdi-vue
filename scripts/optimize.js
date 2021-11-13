@@ -62,7 +62,7 @@ eachLimit(files, 200, async (file) => {
       'convertShapeToPath',
       'sortAttrs',
       'removeDimensions',
-      'removeAttrs',
+      // 'removeAttrs',
       'removeElementsByAttr',
       'removeStyleElement',
       'removeScriptElement',
