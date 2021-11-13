@@ -3,25 +3,26 @@
   "description": "Generates Vue components for the icons provided by Google's Material Icons library",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/FoxAndFly/mdi-vue",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "license": "MIT",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "download": "node scripts/download.js",
-    "optimize": "node scripts/optimize.js",
-    "generate": "node scripts/generate.js",
-    "prepublishOnly": "node scripts/prepublish.js"
+    "download": "node scripts/download.mjs",
+    "optimize": "node scripts/optimize.mjs",
+    "generate": "node scripts/generate.mjs",
+    "prepublishOnly": "node scripts/prepublish.mjs"
   },
   "peerDependencies": {
     "vue": "^3.0.11"
   },
   "devDependencies": {
     "@mdi/js": "^5.9.55",
-    "async": "^3.2.2",
+    "@supercharge/promise-pool": "^2.0.0",
     "execa": "^5.1.1",
     "husky": "^6.0.0",
+    "lodash.difference": "^4.5.0",
     "lodash.template": "^4.5.0",
     "node-fetch": "^2.6.6",
     "svgo": "^2.8.0"
@@ -33,7 +34,7 @@
     "utils/createSvgIcon.js"
   ],
   "prettier": {
-    "printWidth": 80,
+    "printWidth": 90,
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"

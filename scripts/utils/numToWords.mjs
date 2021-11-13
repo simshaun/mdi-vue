@@ -55,7 +55,7 @@ const Ones = [
     'Sextillion',
   ]
 
-function numToWords(n = 0) {
+export function numToWords(n = 0) {
   if (n == 0) return 'Zero' // check for zero
   n = ('0'.repeat((2 * (n += '').length) % 3) + n).match(/.{3}/g) // create triplets array
   if (n.length > Scale.length) return 'Too Large' // check if larger than scale array
@@ -70,9 +70,7 @@ function numToWords(n = 0) {
           ' ' +
           (+Triplet.substr(1) < 20
             ? Ones[+Triplet.substr(1)]
-            : Tens[+Triplet[1]] +
-              (+Triplet[2] ? '-' : '') +
-              Ones[+Triplet[2]]) +
+            : Tens[+Triplet[1]] + (+Triplet[2] ? '-' : '') + Ones[+Triplet[2]]) +
           ' ' +
           Scale[n.length - pos - 1]
       }
@@ -80,5 +78,3 @@ function numToWords(n = 0) {
     out.replace(/\s+/g, ' ').trim()
   )
 }
-
-exports.numToWords = numToWords
