@@ -68,7 +68,7 @@ export default createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringif
 
   const singleTemplateCJS = template(
     `const createSvgIcon = require('./utils/createSvgIcon')
-export default createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
+module.exports = createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
 `
   )
 
