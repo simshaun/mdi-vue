@@ -2,9 +2,9 @@ const eachLimit = require('async/eachLimit')
 const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path')
-const { numToWords } = require('../src/numToWords')
-const { ucFirst } = require('../src/ucFirst')
-const { snakeToCamel } = require('../src/snakeToCamel')
+const { numToWords } = require('./utils/numToWords')
+const { ucFirst } = require('./utils/ucFirst')
+const { snakeToCamel } = require('./utils/snakeToCamel')
 
 const MAX_PARALLEL_REQUESTS = 10
 
