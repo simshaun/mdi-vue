@@ -60,15 +60,9 @@ eachLimit(fs.readdirSync(inputIconsDir), 100, async (file) => {
   // Generate the thousands of individual files!
   //
 
-  const singleTemplateMJS = template(
+  const singleTemplate = template(
     `import createSvgIcon from './utils/createSvgIcon'
 export default createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
-`
-  )
-
-  const singleTemplateCJS = template(
-    `const createSvgIcon = require('./utils/createSvgIcon')
-module.exports = createSvgIcon(<%= JSON.stringify(icon.name) %>, <%= JSON.stringify(icon.svg) %>)
 `
   )
 
@@ -81,18 +75,13 @@ export default i
 
   eachLimit(icons, 20, async (icon) => {
     await fs.promises.writeFile(
-      path.join(outputIconsDir, `${icon.name}.mjs`),
-      singleTemplateMJS({ icon })
-    )
-    await fs.promises.writeFile(
       path.join(outputIconsDir, `${icon.name}.js`),
-      singleTemplateCJS({ icon })
+      singleTemplate({ icon })
     )
     await fs.promises.writeFile(
       path.join(outputIconsDir, `${icon.name}.d.ts`),
       singleTypeTemplate({ icon })
     )
-    console.log(`Generated ${icon.name}.mjs`)
     console.log(`Generated ${icon.name}.js`)
     console.log(`Generated ${icon.name}.d.ts`)
   })
