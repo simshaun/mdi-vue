@@ -1,6 +1,6 @@
 # Material Design Icons
 
-![npm](https://img.shields.io/npm/v/@foxandfly/mdi-vue)
+[![npm](https://img.shields.io/npm/v/@foxandfly/mdi-vue)](https://www.npmjs.com/package/@foxandfly/mdi-vue)
 
 This library generates Vue 3 components for Google's Material Design icons library.
 https://github.com/google/material-design-icons
