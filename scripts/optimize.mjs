@@ -50,7 +50,7 @@ await PromisePool.withConcurrency(200)
         'removeNonInheritableGroupAttrs',
         { name: 'removeUselessStrokeAndFill', params: { removeNone: true } },
         'removeUnusedNS',
-        'cleanupIDs',
+        'cleanupIds',
         'cleanupNumericValues',
         'cleanupListOfValues',
         'moveElemsAttrsToGroup',

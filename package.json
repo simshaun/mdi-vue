@@ -3,7 +3,7 @@
   "description": "Generates Vue components for the icons provided by Google's Material Icons library",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/simshaun/mdi-vue",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "license": "MIT",
   "engines": {
     "node": ">=14"
@@ -18,14 +18,14 @@
     "vue": "^3.0.11"
   },
   "devDependencies": {
-    "@mdi/js": "^6.5.95",
-    "@supercharge/promise-pool": "^2.0.0",
-    "execa": "^5.1.1",
-    "husky": "^6.0.0",
+    "@mdi/js": "^7.4.47",
+    "@supercharge/promise-pool": "^3.2.0",
+    "execa": "^9.3.1",
+    "husky": "^9.1.4",
     "lodash.difference": "^4.5.0",
     "lodash.template": "^4.5.0",
-    "node-fetch": "^2.6.6",
-    "svgo": "^2.8.0"
+    "node-fetch": "^3.3.2",
+    "svgo": "^3.3.2"
   },
   "files": [
     "*.js",
