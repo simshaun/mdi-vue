@@ -1,6 +1,6 @@
 # Material Design Icons
 
-[![npm](https://img.shields.io/npm/v/@foxandfly/mdi-vue)](https://www.npmjs.com/package/@foxandfly/mdi-vue)
+[![npm](https://img.shields.io/npm/v/@libshaun/mdi-vue)](https://www.npmjs.com/package/@libshaun/mdi-vue)
 
 This library generates Vue 3 components for Google's Material Design icons library.
 https://github.com/google/material-design-icons
@@ -10,7 +10,7 @@ https://github.com/google/material-design-icons
 1. Install the package.
 
    ```console
-   npm i @foxandfly/mdi-vue
+   npm i @libshaun/mdi-vue
    ```
 
 2. Import an icon component.
@@ -18,13 +18,13 @@ https://github.com/google/material-design-icons
    * Option 1:
 
    ```javascript
-   import Map from '@foxandfly/mdi-vue/Map';
+   import Map from '@libshaun/mdi-vue/Map';
    ```
 
    * Option 2:
 
    ```javascript
-   import { Map } from '@foxandfly/mdi-vue';
+   import { Map } from '@libshaun/mdi-vue';
    ```
 
    > Option 1 is safer to use, but Option 2 is a bit cleaner. Make sure you utilize
@@ -41,7 +41,7 @@ https://github.com/google/material-design-icons
    </template>
 
    <script>
-   import { Map } from '@foxandfly/mdi-vue';
+   import { Map } from '@libshaun/mdi-vue';
    import { defineComponent } from 'vue'
 
    export default defineComponent({
