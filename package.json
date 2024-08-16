@@ -3,7 +3,7 @@
   "description": "Generates Vue components for the icons provided by Google's Material Icons library",
   "author": "Shaun Simmons",
   "homepage": "https://github.com/simshaun/mdi-vue",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "license": "MIT",
   "engines": {
     "node": ">=14"
